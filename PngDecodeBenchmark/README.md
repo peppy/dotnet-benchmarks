@@ -11,7 +11,7 @@ Intel Xeon CPU E5-1620 v2 3.70GHz, 1 CPU, 8 logical and 4 physical cores
   DefaultJob : .NET Core 2.2.5 (CoreCLR 4.6.27617.05, CoreFX 4.6.27618.01), 64bit RyuJIT
 ```
 
-|             Method  |        Mean |      Error |     StdDev |  Width | Height | Size  |
+|      Encode Method  |        Mean |      Error |     StdDev |  Width | Height | Size (on disk)  |
 |-------------------- |------------:|-----------:|-----------:|-------:|-------:|------:|
 |          ImageOptim | 12,600.3 us |  48.633 us |  40.611 us | 1024px | 1024px |   9kb |
 | ImageMagick convert |  6,669.7 us | 119.754 us | 147.069 us | 1024px | 1024px |  14kb |
