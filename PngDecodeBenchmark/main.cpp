@@ -3,7 +3,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+#include <atomic>
 #include <chrono>
+#include <mutex>
+
+#include "ThreadPool.h"
 
 
 void dummyLoadPng(std::string filename) {
@@ -14,23 +18,36 @@ void dummyLoadPng(std::string filename) {
 }
 
 void performBenchmark(std::string filename) {
+    ThreadPool pool;
+
     tlog::info() << "Warming up with image " << filename;
 
     static const int nWarmupSteps = 100;
+
+    std::atomic<int> counter;
+    std::mutex mutex;
+
+    counter = 0;
     auto progress = tlog::progress(nWarmupSteps);
-    for (int i = 0; i < nWarmupSteps; ++i) {
+    pool.parallelFor(0, nWarmupSteps, [&](int id) {
         dummyLoadPng(filename);
-        progress.update(i);
-    }
+
+        std::lock_guard<std::mutex> lock(mutex);
+        progress.update(++counter);
+    });
 
     tlog::info() << "Benchmarking " << filename;
 
-    static const int nBenchmarkSteps = 1000;
+    static const int nBenchmarkSteps = 4000;
+
+    counter = 0;
     progress = tlog::progress(nBenchmarkSteps);
-    for (int i = 0; i < nBenchmarkSteps; ++i) {
+    pool.parallelFor(0, nBenchmarkSteps, [&](int id) {
         dummyLoadPng(filename);
-        progress.update(i);
-    }
+
+        std::lock_guard<std::mutex> lock(mutex);
+        progress.update(++counter);
+    });
 
     tlog::success() << "Benchmark of " << filename << " completed with " << (std::chrono::microseconds{progress.duration()}.count() / nBenchmarkSteps) << " microseconds per load.";
 }

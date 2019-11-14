@@ -18,9 +18,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 add_executable(stbbench
     main.cpp
+    ThreadPool.cpp
 )
 
 target_include_directories(stbbench PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/stb
     ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/tinylogger
 )
+
+

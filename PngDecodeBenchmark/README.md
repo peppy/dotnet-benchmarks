@@ -29,11 +29,11 @@ Intel Xeon CPU E5-1620 v2 3.70GHz, 1 CPU, 8 logical and 4 physical cores
 STBI Results
 ============
 
-|      Encode Method  |        Mean |
-|-------------------- |------------:|
-|          ImageOptim | 2271 us |
-| ImageMagick convert | 1185 us |
-|            Baseline | 2877 us |
-|  Trimmed ImageOptim |  241 us |
-|  Trimmed Pixelmator |  579 us |
-| Trimmed Imagemagick |  311 us |
+|      Encode Method  |        Single-thread |        Multi-thread |
+|-------------------- |------------:|------------:|
+|          ImageOptim | 2271 us |  889 us |
+| ImageMagick convert | 1185 us |  759 us |
+|            Baseline | 2877 us | 1238 us |
+|  Trimmed ImageOptim |  241 us |   55 us |
+|  Trimmed Pixelmator |  579 us |  108 us |
+| Trimmed Imagemagick |  311 us |   56 us |
