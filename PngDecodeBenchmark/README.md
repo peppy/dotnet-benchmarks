@@ -24,3 +24,16 @@ Intel Xeon CPU E5-1620 v2 3.70GHz, 1 CPU, 8 logical and 4 physical cores
 
 - Baseline is direct output from bmfont generator (https://www.angelcode.com/products/bmfont/)
 - Raw is raw RGBA32 pixel stream
+
+
+STBI Results
+============
+
+|      Encode Method  |        Mean |
+|-------------------- |------------:|
+|          ImageOptim | 2271 us |
+| ImageMagick convert | 1185 us |
+|            Baseline | 2877 us |
+|  Trimmed ImageOptim |  241 us |
+|  Trimmed Pixelmator |  579 us |
+| Trimmed Imagemagick |  311 us |
